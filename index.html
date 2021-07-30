@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilos/estilo.css">
+    <title>Conversor de unidades</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <a href=""><li id="actualPage">Conversor</li></a>
+                <a href="buscador.html"><li>Buscador de constantes</li></a>
+            </ul>
+        </nav>
+    </header>
+    <main class="mainIndex">
+        <select id="selectMagnitud" onchange="selectMagnitudOnChange()">
+            <option value="longitud">Longitud</option>
+            <option value="masa">Masa</option>
+            <option value="presion">Presión</option>
+            <option value="temperatura">Temperatura</option>
+            <option value="energia">Energía</option>
+            <option value="velocidad">Velocidad</option>
+        </select>
+        <div class="divConversion">
+            <input id="inputValorIngresado" class="valor" type="text" oninput="hacerConversion()">
+            <hr>
+            <select id="selectUnidadesOrigen" class="unidad" onchange="hacerConversion()"></select>
+        </div>
+        <img class="arrow" src="img/flecha.png" alt="flecha">
+        <div class="divConversion">
+            <p id="outputValorResultado" class="valor"></p>
+            <hr>
+            <select id="selectUnidadesDestino" class="unidad" onchange="hacerConversion()"></select>
+        </div>
+    </main>
+    <script src="./js/main.js"></script>
+</body>
+</html>

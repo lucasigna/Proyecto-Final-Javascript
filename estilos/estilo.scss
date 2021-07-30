@@ -1,0 +1,121 @@
+@import "variables";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    background: linear-gradient(180deg, $colorAzul -31%, $colorVioleta 123%);
+    background-repeat: repeat;
+    min-height: 100vh;
+    header{
+        padding-top: 70px;
+        nav{
+            ul{
+                width: 25vw;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: space-between;
+                a{
+                    text-decoration: none;
+                    li{
+                        list-style: none;
+                        color: $colorBlanco;
+                        font-family: $fuente;
+                        font-weight: 200;
+                        font-size: 1.5vw;
+                    }
+                    #actualPage{
+                        font-weight: 600;
+                    }
+                }
+            }
+        }
+    }
+    .mainIndex{
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+        align-items: center;
+        height: 50vh;
+        select{
+            width: 30vw;
+            height: 40px;
+            border-radius: 10px;
+            border: none;
+            font-family: $fuente;
+            font-size: 15px;
+            padding: 5px 10px;
+            font-weight: bold;
+        }
+        .divConversion{
+            width: 30vw;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            background-color: $colorBlanco;
+            border-radius: 10px;
+            .unidad{
+                width: 10vw;
+                height: 40px;
+                border-radius: 0px 10px 10px 0px;
+                border: none;
+                font-size: 20px;
+            }
+            .valor{
+                width: 20vw;
+                height: 30px;
+                border-radius: 10px 0px 0px 10px;
+                border: none;
+                padding: 5px 10px;
+                font-family: $fuente;
+                color: $colorNegro;
+                font-size: 18px;
+                font-weight: bold;
+            }
+            #outputValorResultado{
+                padding-top: 5px;
+            }
+        }
+        .arrow{
+            height: 90px;
+            width: 48px;
+        }
+    }
+    .mainSearch{
+        display: flex;
+        flex-flow: column nowrap;
+        .inputBuscar{
+            width: 30vw;
+            height: 30px;
+            border-radius: 10px;
+            border: none;
+            padding: 5px 10px;
+            font-family: $fuente;
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        .divConstante{
+            width: 30vw;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            p{
+                color: $colorBlanco;
+                font-family: $fuente;
+                font-size: 15px;
+                font-weight: 200;
+            }
+        }
+        hr{
+            margin: 10px 0;
+        }
+    }
+
+}
