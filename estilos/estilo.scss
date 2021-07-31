@@ -1,5 +1,7 @@
 @import "variables";
 
+/* Vista PC */
+
 *{
     margin: 0;
     padding: 0;
@@ -117,5 +119,17 @@ body{
             margin: 10px 0;
         }
     }
+
+}
+
+/* Para vista en tablet */
+
+@media only screen and (min-width: 600px) and (max-width: 960px) {
+
+}
+
+/* Para vista en celular */
+
+@media only screen and (max-width: 600px) {
 
 }

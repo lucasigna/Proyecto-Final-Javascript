@@ -20,7 +20,7 @@
         </nav>
     </header>
     <main class="mainIndex">
-        <select id="selectMagnitud" onchange="selectMagnitudOnChange()">
+        <select id="selectMagnitud">
             <option value="longitud">Longitud</option>
             <option value="masa">Masa</option>
             <option value="presion">Presión</option>
@@ -29,17 +29,18 @@
             <option value="velocidad">Velocidad</option>
         </select>
         <div class="divConversion">
-            <input id="inputValorIngresado" class="valor" type="text" oninput="hacerConversion()">
+            <input id="inputValorIngresado" class="valor" type="text">
             <hr>
-            <select id="selectUnidadesOrigen" class="unidad" onchange="hacerConversion()"></select>
+            <select id="selectUnidadesOrigen" class="unidad"></select>
         </div>
         <img class="arrow" src="img/flecha.png" alt="flecha">
         <div class="divConversion">
             <p id="outputValorResultado" class="valor"></p>
             <hr>
-            <select id="selectUnidadesDestino" class="unidad" onchange="hacerConversion()"></select>
+            <select id="selectUnidadesDestino" class="unidad"></select>
         </div>
     </main>
+    <script src="./js/funciones_main.js"></script>
     <script src="./js/main.js"></script>
 </body>
 </html>
