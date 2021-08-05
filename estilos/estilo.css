@@ -4,6 +4,24 @@
   padding: 0;
 }
 
+/* Modificaciones para el scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fdfffc2d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FDFFFC;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e6e6e6;
+}
+
 body {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -64,6 +82,17 @@ body .mainIndex {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-top: 20px;
+}
+
+body .mainIndex__sectionConversor {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
@@ -73,10 +102,10 @@ body .mainIndex {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 50vh;
+  height: 70vh;
 }
 
-body .mainIndex select {
+body .mainIndex__sectionConversor select {
   width: 30vw;
   height: 40px;
   border-radius: 10px;
@@ -85,9 +114,10 @@ body .mainIndex select {
   font-size: 15px;
   padding: 5px 10px;
   font-weight: bold;
+  cursor: pointer;
 }
 
-body .mainIndex .divConversion {
+body .mainIndex__sectionConversor .divConversion {
   width: 30vw;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -103,7 +133,7 @@ body .mainIndex .divConversion {
   border-radius: 10px;
 }
 
-body .mainIndex .divConversion .unidad {
+body .mainIndex__sectionConversor .divConversion .unidad {
   width: 10vw;
   height: 40px;
   border-radius: 0px 10px 10px 0px;
@@ -111,7 +141,7 @@ body .mainIndex .divConversion .unidad {
   font-size: 20px;
 }
 
-body .mainIndex .divConversion .valor {
+body .mainIndex__sectionConversor .divConversion .valor {
   width: 20vw;
   height: 30px;
   border-radius: 10px 0px 0px 10px;
@@ -123,13 +153,75 @@ body .mainIndex .divConversion .valor {
   font-weight: bold;
 }
 
-body .mainIndex .divConversion #outputValorResultado {
+body .mainIndex__sectionConversor .divConversion #inputValorIngresado {
+  width: 17vw;
+}
+
+body .mainIndex__sectionConversor .divConversion #outputValorResultado {
   padding-top: 5px;
 }
 
-body .mainIndex .arrow {
+body .mainIndex__sectionConversor .arrow {
   height: 90px;
   width: 48px;
+}
+
+body .mainIndex__sectionConversor .btn {
+  width: 30vw;
+  height: 40px;
+  font-family: "Roboto Condensed", sans-serif;
+  color: #020100;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+body .mainIndex__sectionConversor .btn:hover {
+  -webkit-box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+body .mainIndex__sectionHistorial {
+  margin-left: 10px;
+  display: none;
+  opacity: 0.0;
+}
+
+body .mainIndex__sectionHistorial div {
+  max-height: 60vh;
+  overflow: auto;
+  padding: 0 10px;
+  scroll-behavior: smooth;
+}
+
+body .mainIndex__sectionHistorial div .divHistorial {
+  width: 30vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 10px 0;
+}
+
+body .mainIndex__sectionHistorial div .divHistorial p {
+  font-family: "Roboto Condensed", sans-serif;
+  color: #FDFFFC;
+  font-size: 15px;
+  text-align: center;
+}
+
+body .mainIndex__sectionHistorial h2 {
+  font-family: "Roboto Condensed", sans-serif;
+  color: #FDFFFC;
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 5px;
 }
 
 body .mainSearch {
