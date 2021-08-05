@@ -13,7 +13,7 @@
     width: 10px;
 }
 ::-webkit-scrollbar-track {
-    background: $transparente; 
+    background: $colorAzul; 
 }
 ::-webkit-scrollbar-thumb {
     background: $colorBlanco;
@@ -76,6 +76,7 @@ body{
                 padding: 5px 10px;
                 font-weight: bold;
                 cursor: pointer;
+                background-color: $colorBlanco;
             }
             .divConversion{
                 width: 30vw;
@@ -114,8 +115,9 @@ body{
                 width: 48px;
             }
             .btn{
-                width: 30vw;
+                min-width: 30vw;
                 height: 40px;
+                background-color: $colorBlanco;
                 font-family: $fuente;
                 color: $colorNegro;
                 font-size: 20px;
@@ -196,11 +198,125 @@ body{
 /* Para vista en tablet */
 
 @media only screen and (min-width: 600px) and (max-width: 960px) {
+    
+    body{
+        header{
+            nav{
+                ul{
+                    width: 50vw;
+                    a{
+                        li{
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+        .mainIndex{
+            flex-direction: column;
+            &__sectionConversor{
+                display: grid;
+                grid-template-areas: "magnitud magnitud magnitud"
+                                     "origen flecha destino"
+                                     "btnconvertir btnconvertir btnconvertir"
+                                     "btnhistorial btnhistorial btnhistorial";
+                #selectMagnitud{
+                    grid-area: magnitud;
+                    margin: 0 auto;
+                    width: 70vw;
+                }
+                #divOrigen{
+                    grid-area: origen;
+                }
+                #divDestino{
+                    grid-area: destino;
+                }
+                .arrow{
+                    grid-area: flecha;
+                    transform: rotate(270deg);
+                    height: 45px;
+                    width: 25px;
+                }
+                #btnConvertir{
+                    grid-area: btnconvertir;
+                }
+                #btnVerHistorial{
+                    grid-area: btnhistorial;
+                }
+            }
+            &__sectionHistorial{
+                margin-bottom: 20px;
+            }
+        }
+        .mainSearch{
+            .inputBuscar{
+                width: 70vw;
+            }
+            .divConstante{
+                width: 70vw;
+            }
+        }
+    }
 
 }
 
 /* Para vista en celular */
 
 @media only screen and (max-width: 600px) {
+
+    body{
+        header{
+            nav{
+                ul{
+                    width: 70vw;
+                    a{
+                        li{
+                            font-size: 20px;
+                        }
+                    }
+                }
+            }
+        }
+        .mainIndex{
+            flex-direction: column;
+            &__sectionConversor{    
+                select{
+                    width: 70vw;
+                }
+                .divConversion{
+                    width: 70vw;
+                    .unidad{
+                        width: 20vw;
+                    }
+                    .valor{
+                        width: 50vw;
+                    }       
+                    #inputValorIngresado{
+                        width: 45vw;
+                    }
+                }
+                .btn{
+                    width: 70vw;
+                }
+            }
+            &__sectionHistorial{
+                min-width: 70vw;
+                margin-bottom: 20px;
+                div{
+                    .divHistorial{
+                        width: 70vw;
+                    }
+                }
+            }
+        }
+        .mainSearch{
+            .inputBuscar{
+                width: 80vw;
+            }
+            .divConstante{
+                width: 80vw;
+            }
+        }
+    }
 
 }
