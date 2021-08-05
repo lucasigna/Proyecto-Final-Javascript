@@ -186,6 +186,7 @@ body .mainIndex__sectionConversor .btn:hover {
 }
 
 body .mainIndex__sectionHistorial {
+  width: 30vw;
   margin-left: 10px;
   display: none;
   opacity: 0.0;
