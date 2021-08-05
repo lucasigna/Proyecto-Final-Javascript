@@ -130,7 +130,7 @@ body{
             }
         }
         &__sectionHistorial{
-            width: 30vw;
+            min-width: 30vw;
             margin-left: 10px;
             display: none;
             opacity: 0.0;
