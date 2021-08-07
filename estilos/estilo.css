@@ -178,8 +178,6 @@ body .mainIndex__sectionConversor .btn {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
 }
 
 body .mainIndex__sectionConversor .btn:hover {

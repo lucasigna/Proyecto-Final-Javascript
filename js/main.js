@@ -112,14 +112,6 @@ $(document).ready(function() {
 
     }
 
-    // Hago una función para eliminar los nodos hijos
-    function eliminarNodosHijos(parent) {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild);
-        }
-        // Elimino el primer nodo hijo hasta que éste sea nulo y salga del bucle while
-    }
-
     function selectMagnitudOnChange() {
         
         inputValorIngresado.val('');
@@ -174,6 +166,10 @@ $(document).ready(function() {
 
             } else {
                 resultado = valorIngresadoFloat;
+            }
+            // Si el número es flotante lo redondeo en 4 decimales
+            if (!Number.isInteger(resultado)) {
+                resultado = resultado.toFixed(4);
             }
             outputValorResultado.html(resultado);
             // Guardo la conversión en el local storage
