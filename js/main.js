@@ -27,225 +27,227 @@ const unidadesEnergia = ['Joule','Kcal'];
 const unidadesEnergiaValuesOption = ['joule','kcal'];
 const unidadesVelocidad = ['m/s','Km/h','Millas/h'];
 const unidadesVelocidadValuesOption = ['m/s','km/h','mile/h'];
-
-// Declaro los select
-let selectDeOrigen = document.getElementById("selectUnidadesOrigen");
-let selectDeDestino = document.getElementById("selectUnidadesDestino");
-let selectMagnitudElegida = document.getElementById("selectMagnitud");
-
-// Declaro el input y output
-let inputValorIngresado = document.getElementById("inputValorIngresado");
-let outputValorResultado = document.getElementById("outputValorResultado");
-
-// Declaro el botón de convertir
-let btnConvertir = document.getElementById("btnConvertir");
-// Declaro el botón de ver historial
-let btnHistorial = document.getElementById("btnVerHistorial");
-// Declaro la sección de historial
-let sectionHistorial = document.getElementById("sectionHistorial");
-let divsHistorial = document.getElementById("divsHistorial");
-
-// Asigno los eventos
-btnHistorial.addEventListener("click", mostrarHistorial);
-btnConvertir.addEventListener("click", hacerConversion);
-inputValorIngresado.addEventListener("keyup", hacerConversion);
-selectDeOrigen.addEventListener("change", ponerOutputEnBlanco);
-selectDeDestino.addEventListener("change", ponerOutputEnBlanco);
-selectMagnitudElegida.addEventListener("change", selectMagnitudOnChange);
-
+// Array de values del select de magnitudes
 const valoresOptionSelectDeMagnitudes = ['longitud','masa','presion','temperatura','energia','velocidad'];
-
+// Booleano para mostrar/ocultar historial
 let historialOculto = true;
+// Array de conversiones para localStorage
+const conversiones = [];
 
-// Recorro el localStorage y relleno el historial
-rellenarHistorial();
+$(document).ready(function() {
 
-// Como la magnitud por defecto siempre va a ser longitud, creo los options en JS
-// y los agrego a cada select con sus valores y textos
-agregarOptionsALosSelectDeOrigenYDestino(unidadesLongitud, unidadesLongitudValuesOption);
+    // Declaro los select
+    const selectDeOrigen = $("#selectUnidadesOrigen");
+    //selectDeOrigen.css({ backgroundColor: 'red' });
+    let selectDeDestino = $("#selectUnidadesDestino");
+    let selectMagnitudElegida = $("#selectMagnitud");
 
-//! Funciones
+    // Declaro el input y output
+    let inputValorIngresado = $("#inputValorIngresado");
+    let outputValorResultado = $("#outputValorResultado");
 
-// Función para rellenar el historial
-function rellenarHistorial() {
-    
-    // Elimino todos sus nodos hijos
-    eliminarNodosHijos(divsHistorial);
-    for (let i = localStorage.length-1; i >= 0 ; i--) {
-        let conversion = JSON.parse( localStorage.getItem(`conversion${i}`) );
-        crearDivHistorial(conversion);
-    }
+    // Declaro el botón de convertir
+    let btnConvertir = $("#btnConvertir");
+    // Declaro el botón de ver historial
+    let btnHistorial = $("#btnVerHistorial");
+    // Declaro la sección de historial
+    let sectionHistorial = $("#sectionHistorial");
+    let divsHistorial = $("#divsHistorial");
 
-}
+    // Asigno los eventos
+    btnHistorial.click( mostrarHistorial );
+    btnConvertir.click( hacerConversion );
+    inputValorIngresado.keyup( hacerConversion );
+    selectDeOrigen.change( ponerOutputEnBlanco );
+    selectDeDestino.change( ponerOutputEnBlanco );
+    selectMagnitudElegida.change( selectMagnitudOnChange );
 
-function crearDivHistorial(conversion) {
-    
-    let divHistorial = document.createElement('div');
-    divHistorial.classList.add('divHistorial');
-    let p1 = document.createElement('p');
-    p1.innerHTML = `${conversion.valorInput} ${conversion.unidadInput}`;
-    let p2 = document.createElement('p');
-    p2.innerHTML = '=>';
-    let p3 = document.createElement('p');
-    p3.innerHTML = `${conversion.valorOutput} ${conversion.unidadOutput}`;
-    divHistorial.appendChild(p1);
-    divHistorial.appendChild(p2);
-    divHistorial.appendChild(p3);
-    divsHistorial.appendChild(divHistorial);
-    let hr = document.createElement('hr');
-    divsHistorial.appendChild(hr);
+    // Como la magnitud por defecto siempre va a ser longitud, creo los options en JS
+    // y los agrego a cada select con sus valores y textos
+    agregarOptionsALosSelectDeOrigenYDestino(unidadesLongitud, unidadesLongitudValuesOption);
 
-}
+    // Recorro el localStorage y relleno el historial
+    rellenarHistorial();
 
-// Función para poner en blanco el output al cambiar los select
-function ponerOutputEnBlanco(e) {
-    outputValorResultado.innerHTML = '';
-}
+    //! Funciones
 
-// Creo una función para agregar options a los select de unidades
-function agregarOptionsALosSelectDeOrigenYDestino(unidades, valuesOption) {
-    
-    for (const i in unidades) {
-
-        let optionOrigen = document.createElement("option");
-        optionOrigen.value = valuesOption[i];
-        optionOrigen.innerHTML = unidades[i];
-        selectDeOrigen.appendChild(optionOrigen);
-        let optionDestino = document.createElement("option");
-        optionDestino.value = valuesOption[i];
-        optionDestino.innerHTML = unidades[i];
-        selectDeDestino.appendChild(optionDestino);
-
-    }
-
-}
-
-// Hago una función para eliminar los nodos hijos
-function eliminarNodosHijos(parent) {
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
-    // Elimino el primer nodo hijo hasta que éste sea nulo y salga del bucle while
-}
-
-function selectMagnitudOnChange() {
-    
-    inputValorIngresado.value = '';
-    outputValorResultado.innerHTML = '';
-    
-    let magnitudElegida = selectMagnitudElegida.value;
-    // Elimino los nodos hijos options para posteriormente agregar los nuevos
-    eliminarNodosHijos(selectDeDestino);
-    eliminarNodosHijos(selectDeOrigen);
-    switch (magnitudElegida) {
-        case valoresOptionSelectDeMagnitudes[0]: // Longitud
-            agregarOptionsALosSelectDeOrigenYDestino(unidadesLongitud, unidadesLongitudValuesOption);
-            break;
-        case valoresOptionSelectDeMagnitudes[1]: // Masa
-            agregarOptionsALosSelectDeOrigenYDestino(unidadesMasa, unidadesMasaValuesOption);
-            break;
-        case valoresOptionSelectDeMagnitudes[2]: // Presión
-            agregarOptionsALosSelectDeOrigenYDestino(unidadesPresion, unidadesPresionValuesOption);
-            break;
-        case valoresOptionSelectDeMagnitudes[3]: // Temperatura
-            agregarOptionsALosSelectDeOrigenYDestino(unidadesTemperatura, unidadesTemperaturaValuesOption);
-            break;
-        case valoresOptionSelectDeMagnitudes[4]: // Energía
-            agregarOptionsALosSelectDeOrigenYDestino(unidadesEnergia, unidadesEnergiaValuesOption);
-            break;
-        case valoresOptionSelectDeMagnitudes[5]: // Velocidad
-            agregarOptionsALosSelectDeOrigenYDestino(unidadesVelocidad, unidadesVelocidadValuesOption);
-            break;    
-        default:
-            break;
-    }
-}
-
-function hacerConversion(event) {
-
-    // Recibo el valor ingresado
-    let valorIngresado = inputValorIngresado.value;
-    // Cambio las comas por puntos por si acaso, y casteo la string a float
-    let valorIngresadoFloat = parseFloat(valorIngresado.replace(',','.'));
-    // Me aseguro que se presionó el enter (tecla 13) o se hizo click en el botón de convertir
-    if (event.keyCode == 13 || event.type == 'click') {
-        // Agrego un if para evitar un error si el usuario pone en blanco el input o ingresa un NaN
-        if ( valorIngresadoFloat == '' || isNaN(valorIngresadoFloat) ) {
-            outputValorResultado.innerHTML = '';
-            return;
+    // Función para rellenar el historial
+    function rellenarHistorial() {
+        
+        let conversiones = JSON.parse( localStorage.getItem('conversiones') );
+        for (const conversion of conversiones) {
+            crearDivHistorial(conversion);
         }
-        let resultado;
-        // Pongo un condicional por si la unidad de origen es igual a la de destino, en ese caso no se convierte nada
-        if (selectDeOrigen.value != selectDeDestino.value) {
 
-            resultado = xToX(selectDeOrigen.value, selectDeDestino.value, valorIngresadoFloat);
+    }
 
+    function crearDivHistorial(conversion) {
+        
+        divsHistorial.prepend(`
+            <div class="divHistorial">
+                <p>${conversion.valorInput} ${conversion.unidadInput}</p>
+                <p>=></p>
+                <p>${conversion.valorOutput} ${conversion.unidadOutput}</p>
+            </div>
+            <hr>
+        `
+        );
+
+    }
+
+    // Función para poner en blanco el output al cambiar los select
+    function ponerOutputEnBlanco(e) {
+        outputValorResultado.html('');
+    }
+
+    // Creo una función para agregar options a los select de unidades
+    function agregarOptionsALosSelectDeOrigenYDestino(unidades, valuesOption) {
+        
+        for (const i in unidades) {
+
+            selectDeOrigen.append(`<option value=${valuesOption[i]}>${unidades[i]}</option>`);
+            selectDeDestino.append(`<option value=${valuesOption[i]}>${unidades[i]}</option>`);
+
+        }
+
+    }
+
+    // Hago una función para eliminar los nodos hijos
+    function eliminarNodosHijos(parent) {
+        while (parent.firstChild) {
+            parent.removeChild(parent.firstChild);
+        }
+        // Elimino el primer nodo hijo hasta que éste sea nulo y salga del bucle while
+    }
+
+    function selectMagnitudOnChange() {
+        
+        inputValorIngresado.val('');
+        outputValorResultado.html('');
+        
+        let magnitudElegida = selectMagnitudElegida.val();
+        // Elimino los nodos hijos options para posteriormente agregar los nuevos
+        selectDeDestino.empty();
+        selectDeOrigen.empty();
+        switch (magnitudElegida) {
+            case valoresOptionSelectDeMagnitudes[0]: // Longitud
+                agregarOptionsALosSelectDeOrigenYDestino(unidadesLongitud, unidadesLongitudValuesOption);
+                break;
+            case valoresOptionSelectDeMagnitudes[1]: // Masa
+                agregarOptionsALosSelectDeOrigenYDestino(unidadesMasa, unidadesMasaValuesOption);
+                break;
+            case valoresOptionSelectDeMagnitudes[2]: // Presión
+                agregarOptionsALosSelectDeOrigenYDestino(unidadesPresion, unidadesPresionValuesOption);
+                break;
+            case valoresOptionSelectDeMagnitudes[3]: // Temperatura
+                agregarOptionsALosSelectDeOrigenYDestino(unidadesTemperatura, unidadesTemperaturaValuesOption);
+                break;
+            case valoresOptionSelectDeMagnitudes[4]: // Energía
+                agregarOptionsALosSelectDeOrigenYDestino(unidadesEnergia, unidadesEnergiaValuesOption);
+                break;
+            case valoresOptionSelectDeMagnitudes[5]: // Velocidad
+                agregarOptionsALosSelectDeOrigenYDestino(unidadesVelocidad, unidadesVelocidadValuesOption);
+                break;    
+            default:
+                break;
+        }
+    }
+
+    function hacerConversion(event) {
+
+        // Recibo el valor ingresado
+        let valorIngresado = inputValorIngresado.val();
+        // Cambio las comas por puntos por si acaso, y casteo la string a float
+        let valorIngresadoFloat = parseFloat(valorIngresado.replace(',','.'));
+        // Me aseguro que se presionó el enter (tecla 13) o se hizo click en el botón de convertir
+        if (event.keyCode == 13 || event.type == 'click') {
+            // Agrego un if para evitar un error si el usuario pone en blanco el input o ingresa un NaN
+            if ( valorIngresadoFloat == '' || isNaN(valorIngresadoFloat) ) {
+                outputValorResultado.html('');
+                return;
+            }
+            let resultado;
+            // Pongo un condicional por si la unidad de origen es igual a la de destino, en ese caso no se convierte nada
+            if (selectDeOrigen.val() != selectDeDestino.val()) {
+
+                resultado = xToX(selectDeOrigen.val(), selectDeDestino.val(), valorIngresadoFloat);
+
+            } else {
+                resultado = valorIngresadoFloat;
+            }
+            outputValorResultado.html(resultado);
+            // Guardo la conversión en el local storage
+            let conversion = new Conversion(valorIngresadoFloat.toString(), corregirUnidad(selectDeOrigen.val()), resultado.toString(), corregirUnidad(selectDeDestino.val()));
+            conversiones.push(conversion);
+            let conversionesJson = JSON.stringify(conversiones);
+            localStorage.setItem("conversiones", conversionesJson);
+            crearDivHistorial(conversion);
+        }
+    }
+
+    // Esta función retorna la string de la unidad ingresada, ya que en los select se usan una distinta a la que ve el usuario
+    function corregirUnidad(unidad) {
+        
+        // Longitud
+        for (const i in unidadesLongitudValuesOption) {
+            if (unidad == unidadesLongitudValuesOption[i]) {
+                return unidadesLongitud[i];
+            }
+        }
+        // Masa
+        for (const i in unidadesMasaValuesOption) {
+            if (unidad == unidadesMasaValuesOption[i]) {
+                return unidadesMasa[i];
+            }
+        }
+        // Velocidad
+        for (const i in unidadesVelocidadValuesOption) {
+            if (unidad == unidadesVelocidadValuesOption[i]) {
+                return unidadesVelocidad[i];
+            }
+        }
+        // Presión
+        for (const i in unidadesPresionValuesOption) {
+            if (unidad == unidadesPresionValuesOption[i]) {
+                return unidadesPresion[i];
+            }
+        }
+        // Temperatura
+        for (const i in unidadesTemperaturaValuesOption) {
+            if (unidad == unidadesTemperaturaValuesOption[i]) {
+                return unidadesTemperatura[i];
+            }
+        }
+        // Energía
+        for (const i in unidadesEnergiaValuesOption) {
+            if (unidad == unidadesEnergiaValuesOption[i]) {
+                return unidadesEnergia[i];
+            }
+        }
+
+    }
+
+    function mostrarHistorial(event) {
+
+        if (historialOculto) {
+
+            sectionHistorial.css({
+                display: 'initial',
+                opacity: '1.0'
+            });
+            btnHistorial.html('Ocultar historial');
+            historialOculto = false; 
         } else {
-            resultado = valorIngresadoFloat;
-        }
-        outputValorResultado.innerHTML = resultado;
-        // Guardo la conversión en el local storage
-        let conversion = new Conversion(valorIngresadoFloat.toString(), corregirUnidad(selectDeOrigen.value), resultado.toString(), corregirUnidad(selectDeDestino.value));
-        let conversionJson = JSON.stringify(conversion);
-        localStorage.setItem("conversion"+localStorage.length, conversionJson);
-        rellenarHistorial();
-    }
-}
 
-// Esta función retorna la string de la unidad ingresada, ya que en los select se usan una distinta a la que ve el usuario
-function corregirUnidad(unidad) {
-    
-    // Longitud
-    for (const i in unidadesLongitudValuesOption) {
-        if (unidad == unidadesLongitudValuesOption[i]) {
-            return unidadesLongitud[i];
+            
+            sectionHistorial.css({
+                display: 'none',
+                opacity: '0.0'
+            });
+            btnHistorial.html('Ver historial');
+            historialOculto = true; 
         }
-    }
-    // Masa
-    for (const i in unidadesMasaValuesOption) {
-        if (unidad == unidadesMasaValuesOption[i]) {
-            return unidadesMasa[i];
-        }
-    }
-    // Velocidad
-    for (const i in unidadesVelocidadValuesOption) {
-        if (unidad == unidadesVelocidadValuesOption[i]) {
-            return unidadesVelocidad[i];
-        }
-    }
-    // Presión
-    for (const i in unidadesPresionValuesOption) {
-        if (unidad == unidadesPresionValuesOption[i]) {
-            return unidadesPresion[i];
-        }
-    }
-    // Temperatura
-    for (const i in unidadesTemperaturaValuesOption) {
-        if (unidad == unidadesTemperaturaValuesOption[i]) {
-            return unidadesTemperatura[i];
-        }
-    }
-    // Energía
-    for (const i in unidadesEnergiaValuesOption) {
-        if (unidad == unidadesEnergiaValuesOption[i]) {
-            return unidadesEnergia[i];
-        }
+
     }
 
-}
-
-function mostrarHistorial(event) {
-
-    if (historialOculto) {
-        sectionHistorial.style.display = 'initial';
-        sectionHistorial.style.opacity = '1.0';
-        btnHistorial.innerHTML = 'Ocultar historial';
-        historialOculto = false; 
-    } else {
-        sectionHistorial.style.display = 'none';
-        sectionHistorial.style.opacity = '0.0';
-        btnHistorial.innerHTML = 'Ver historial';
-        historialOculto = true; 
-    }
-
-}
+});

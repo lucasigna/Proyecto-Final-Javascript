@@ -209,7 +209,7 @@ body .mainIndex__sectionHistorial div .divHistorial {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  margin: 10px 0;
+  margin: 10px auto;
 }
 
 body .mainIndex__sectionHistorial div .divHistorial p {
