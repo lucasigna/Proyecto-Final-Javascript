@@ -16,10 +16,11 @@ $(document).ready(function() {
             inputBusqueda.on( "input", buscarConstante );
 
             // Relleno el contenedor con constantes para que no parezca vacío
+            divContainerConstantes.toggle();
             agregarCincoConstantes();
+            divContainerConstantes.toggle(200);
 
             function crearDivConstante(nombre,valor) {
-
                 divContainerConstantes.append(`
                     <div class="divConstante">
                         <p>${nombre}</p>
@@ -42,15 +43,19 @@ $(document).ready(function() {
                 query = query.toUpperCase();
 
                 if (query == '') {
+                    divContainerConstantes.toggle();
                     agregarCincoConstantes();
+                    divContainerConstantes.toggle(200);
                     return;
                 }
 
+                divContainerConstantes.toggle();
                 for (const constante of respuesta) {
                     if (constante.nombre.toUpperCase().includes(query)) {
                         crearDivConstante(constante.nombre, constante.valor);
                     }
                 }
+                divContainerConstantes.toggle(200);
             }
 
             function agregarCincoConstantes() {
