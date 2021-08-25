@@ -1,0 +1,50 @@
+[
+    {
+        "nombre":"Unidad de masa atómica",
+        "valor":"1.66053873 x 10<sup>-27</sup> kg"
+    },
+    {
+        "nombre":"Número de Avogadro",
+        "valor":"6.02214199 x 10<sup>23</sup> mol<sup>-1</sup>"
+    },
+    {
+        "nombre":"Radio de Bohr",
+        "valor":"0.5291772083 x 10<sup>-10</sup> m"
+    },
+    {
+        "nombre":"Permitividad del vacío",
+        "valor":"8.854187817 x 10<sup>-12</sup> F m<sup>-1</sup>"
+    },
+    {
+        "nombre":"Masa del Electrón",
+        "valor":"9.10938188 x 10<sup>-31</sup> kg"
+    },
+    {
+        "nombre":"Electron-Volt",
+        "valor":"1.602176462 x 10<sup>-19</sup> J"
+    },
+    {
+        "nombre":"Constante de Faraday",
+        "valor":"9.64853415 x 10<sup>4</sup> C mol<sup>-1</sup>"
+    },
+    {
+        "nombre":"Constante Molar de los Gases",
+        "valor":"8.314472 J K<sup>-1</sup> mol<sup>-1</sup>"
+    },
+    {
+        "nombre":"Masa del Neutrón",
+        "valor":"1.67492716 x 10<sup>-27</sup> kg"
+    },
+    {
+        "nombre":"Longitud de Planck",
+        "valor":"1.6160 x 10<sup>-35</sup> m"
+    },
+    {
+        "nombre":"Masa del Protón",
+        "valor":"1.67262158 x 10<sup>-27</sup> kg"
+    },
+    {
+        "nombre":"Velocidad de la Luz en el Vacío",
+        "valor":"2.99792458 x 10<sup>8</sup> m s<sup>-1</sup>"
+    }
+]

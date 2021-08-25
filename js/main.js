@@ -33,12 +33,17 @@ const valoresOptionSelectDeMagnitudes = ['longitud','masa','presion','temperatur
 let historialOculto = true;
 // Array de conversiones para localStorage
 const conversiones = [];
+// Guardo el width de la ventana para mantener el responsive
+let screenSize = window.innerWidth;
 
 $(document).ready(function() {
-
+    // Función para hacer responsive el historial cuando se redimensiona la ventana
+    $(window).resize(function() {
+        screenSize = window.innerWidth;
+        ajustarVistaHistorial();
+    });
     // Declaro los select
     const selectDeOrigen = $("#selectUnidadesOrigen");
-    //selectDeOrigen.css({ backgroundColor: 'red' });
     let selectDeDestino = $("#selectUnidadesDestino");
     let selectMagnitudElegida = $("#selectMagnitud");
 
@@ -223,27 +228,91 @@ $(document).ready(function() {
 
     }
 
-    function mostrarHistorial(event) {
+    function mostrarHistorial() {
 
-        if (historialOculto) {
+        if (screenSize < 960) {
+            // Vista tablet y celular
+            if (historialOculto) {
 
-            sectionHistorial.css({
-                display: 'initial',
-                opacity: '1.0'
-            });
-            btnHistorial.html('Ocultar historial');
-            historialOculto = false; 
-        } else {
+                sectionHistorial.animate(
+                    {
+                        height: '100%'
+                    },200
+                ).animate(
+                    {
+                        opacity: '1.0',
+                    },200
+                );
+                btnHistorial.html('Ocultar historial');
+                historialOculto = false; 
+            } else {
 
-            
-            sectionHistorial.css({
-                display: 'none',
-                opacity: '0.0'
-            });
-            btnHistorial.html('Ver historial');
-            historialOculto = true; 
+                sectionHistorial.animate(
+                    {
+                        height: '0'
+                    },200
+                ).animate(
+                    {
+                        opacity: '0.0',
+                    },200
+                );
+                btnHistorial.html('Ver historial');
+                historialOculto = true; 
+            }
+        } else if (screenSize >= 960) {
+            // Vista PC
+            if (historialOculto) {
+
+                sectionHistorial.animate(
+                    {
+                        width: '30vw',
+                    },200
+                ).animate(
+                    {
+                        opacity: '1.0',
+                    },200
+                );
+                btnHistorial.html('Ocultar historial');
+                historialOculto = false; 
+            } else {
+
+                sectionHistorial.animate(
+                    {
+                        width: '0',
+                    },200
+                ).animate(
+                    {
+                        opacity: '0.0',
+                    },200
+                );
+                btnHistorial.html('Ver historial');
+                historialOculto = true; 
+            }
         }
 
+    }
+    // Función que ajusta la vista del historial cuando se redimensiona la pantalla (Evita el height: 0, etc.)
+    function ajustarVistaHistorial() {
+
+        if (screenSize < 960) {
+            // Vista tablet y celular
+            if (!historialOculto) {
+
+                sectionHistorial.css({
+                    'height': '100%',
+                    'width': '70vw'
+                });
+            }
+        } else if (screenSize >= 960) {
+            // Vista PC
+            if (!historialOculto) {
+
+                sectionHistorial.css({
+                    'height': '100%',
+                    'width': '30vw'
+                });
+            }
+        }
     }
 
 });

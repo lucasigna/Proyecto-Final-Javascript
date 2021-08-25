@@ -17,7 +17,8 @@
 }
 ::-webkit-scrollbar-thumb {
     background: $colorBlanco;
-    border-radius: 5px; 
+    border-radius: 5px;
+    border: 1px solid $colorAzul;
 }
 ::-webkit-scrollbar-thumb:hover {
     background: $colorBlancoSuave; 
@@ -60,6 +61,7 @@ body{
         display: flex;
         flex-direction: row;
         margin-top: 20px;
+        overflow: hidden;
         &__sectionConversor{
             display: flex;
             flex-flow: column nowrap;
@@ -131,9 +133,8 @@ body{
             }
         }
         &__sectionHistorial{
-            min-width: 30vw;
+            width: 0;
             margin-left: 10px;
-            display: none;
             opacity: 0.0;
             div{
                 max-height: 60vh;
@@ -141,7 +142,7 @@ body{
                 padding: 0 10px;
                 scroll-behavior: smooth;
                 .divHistorial{
-                    width: 30vw;
+                    width: 25vw;
                     display: flex;
                     justify-content: space-between;
                     margin: 10px auto;
@@ -244,7 +245,9 @@ body{
                 }
             }
             &__sectionHistorial{
+                width: 70vw;
                 margin-bottom: 20px;
+                height: 0;
             }
         }
         .mainSearch{
@@ -299,11 +302,12 @@ body{
                 }
             }
             &__sectionHistorial{
-                min-width: 70vw;
+                width: 70vw;
+                height: 0;
                 margin-bottom: 20px;
                 div{
                     .divHistorial{
-                        width: 70vw;
+                        width: 50vw;
                     }
                 }
             }
