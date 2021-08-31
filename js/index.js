@@ -15,7 +15,6 @@ $(window).ready(function() {
     const router = () => {
         const path = parseLocation();
         const page = findPageByPath(path, routes).page;
-
         switch(page) {
             case 'conversor':
                 crearVistaConversor(app,header);
@@ -31,9 +30,7 @@ $(window).ready(function() {
         }
     }
 
-    $(window).on('load', function(){
-        router();
-    });
+    router();
 
     $(window).on('hashchange', function(){
         router();
