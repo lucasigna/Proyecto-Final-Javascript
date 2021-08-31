@@ -151,7 +151,6 @@ function crearVistaConversor(app, header) {
         
         for (const i in unidades) {
 
-            console.log('loooool');
             selectDeOrigen.append(`<option value=${valuesOption[i]}>${unidades[i]}</option>`);
             selectDeDestino.append(`<option value=${valuesOption[i]}>${unidades[i]}</option>`);
 
