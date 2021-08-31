@@ -31,8 +31,8 @@ const unidadesVelocidadValuesOption = ['m/s','km/h','mile/h'];
 const valoresOptionSelectDeMagnitudes = ['longitud','masa','presion','temperatura','energia','velocidad'];
 // Booleano para mostrar/ocultar historial
 let historialOculto = true;
-// Array de conversiones para localStorage
-const conversiones = [];
+// Array de conversiones para localStorage, si no existe creo un array vacío
+let conversiones = JSON.parse( localStorage.getItem('conversiones') ) || [];
 // Guardo el width de la ventana para mantener el responsive
 let screenSize = window.innerWidth;
 
@@ -119,8 +119,7 @@ function crearVistaConversor(app, header) {
 
     // Función para rellenar el historial
     function rellenarHistorial() {
-        
-        let conversiones = JSON.parse( localStorage.getItem('conversiones') );
+
         for (const conversion of conversiones) {
             crearDivHistorial(conversion);
         }
