@@ -1,36 +1,42 @@
-const app = $('#app');
+$(window).ready(function() {
 
-const routes = [
-        { path: '/', page: 'conversor' },
-        { path: '/buscador', page: 'buscador' },
-    ];
+    let app = $('#app');
+    let header = $('header');
 
-const parseLocation = () => location.hash.slice(1).toLocaleLowerCase() || '/';
+    const routes = [
+            { path: '/', page: 'conversor' },
+            { path: '/buscador', page: 'buscador' },
+        ];
 
-const findPageByPath = (path, routes) => routes.find(route => route.path == path);
+    const parseLocation = () => location.hash.slice(1).toLocaleLowerCase() || '/';
 
-const router = () => {
-    const path = parseLocation();
-    const page = findPageByPath(path, routes).page;
+    const findPageByPath = (path, routes) => routes.find(route => route.path == path);
 
-    switch(page) {
-        case 'conversor':
-            app.html('');
-            break;
-        
-        case 'buscador':
-            app.listar('#app');
-            break;
-        
-        default:
-            ErrorComponent('#app');
+    const router = () => {
+        const path = parseLocation();
+        const page = findPageByPath(path, routes).page;
+
+        switch(page) {
+            case 'conversor':
+                crearVistaConversor(app,header);
+                break;
+            
+            case 'buscador':
+                crearVistaBuscador(app,header);
+                break;
+            
+            default:
+                console.log('Página no encontrada');
+                break;
+        }
     }
-}
 
-$(window).on('load', function(){
-    router();
-});
+    $(window).on('load', function(){
+        router();
+    });
 
-$(window).on('hashchange', function(){
-    router();
+    $(window).on('hashchange', function(){
+        router();
+    });
+
 });

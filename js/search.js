@@ -1,7 +1,21 @@
 // Funcionalidad buscador de constantes
 
-$(document).ready(function() {
-
+function crearVistaBuscador(app, header) {
+        
+    header.html(`
+        <nav>
+            <ul>
+                <a href=""><li>Conversor</li></a>
+                <a href="#/buscador"><li id="actualPage">Buscador de constantes</li></a>
+            </ul>
+        </nav>
+    `);
+    app.removeClass('mainIndex').addClass('mainSearch');
+    app.html(`
+        <input id="inputBusqueda" type="text" class="inputBuscar" placeholder="Ej: Constante de Planck">
+        <hr>
+        <div id="contenedorConstantesEncontradas"></div>
+    `);
     // Leo el archivo json con las constantes
     $.getJSON('./constantes.json', function(respuesta,estado) {
 
@@ -70,4 +84,4 @@ $(document).ready(function() {
 
     });
 
-});
+}

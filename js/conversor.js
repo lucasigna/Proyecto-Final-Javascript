@@ -36,7 +36,48 @@ const conversiones = [];
 // Guardo el width de la ventana para mantener el responsive
 let screenSize = window.innerWidth;
 
-$(document).ready(function() {
+
+function crearVistaConversor(app, header) {
+        
+    header.html(`
+        <nav>
+            <ul>
+                <a href=""><li id="actualPage">Conversor</li></a>
+                <a href="#/buscador"><li>Buscador de constantes</li></a>
+            </ul>
+        </nav>
+    `);
+    app.removeClass('mainSearch').addClass('mainIndex');
+    app.html(`
+        <section class="mainIndex__sectionConversor">
+            <select id="selectMagnitud">
+                <option value="longitud">Longitud</option>
+                <option value="masa">Masa</option>
+                <option value="presion">Presión</option>
+                <option value="temperatura">Temperatura</option>
+                <option value="energia">Energía</option>
+                <option value="velocidad">Velocidad</option>
+            </select>
+            <div id="divOrigen" class="divConversion">
+                <input id="inputValorIngresado" class="valor" type="number">
+                <hr>
+                <select id="selectUnidadesOrigen" class="unidad"></select>
+            </div>
+            <img class="arrow" src="img/flecha.png" alt="flecha">
+            <button id="btnConvertir" class="btn">Convertir</button>
+            <div id="divDestino" class="divConversion">
+                <p id="outputValorResultado" class="valor"></p>
+                <hr>
+                <select id="selectUnidadesDestino" class="unidad"></select>
+            </div>
+            <button id="btnVerHistorial" class="btn">Ver historial</button>
+        </section>
+        <section id="sectionHistorial" class="mainIndex__sectionHistorial">
+            <h2>Historial</h2>
+            <hr>
+            <div id="divsHistorial"></div>
+        </section>
+    `);
     // Función para hacer responsive el historial cuando se redimensiona la ventana
     $(window).resize(function() {
         screenSize = window.innerWidth;
@@ -110,6 +151,7 @@ $(document).ready(function() {
         
         for (const i in unidades) {
 
+            console.log('loooool');
             selectDeOrigen.append(`<option value=${valuesOption[i]}>${unidades[i]}</option>`);
             selectDeDestino.append(`<option value=${valuesOption[i]}>${unidades[i]}</option>`);
 
@@ -314,5 +356,9 @@ $(document).ready(function() {
             }
         }
     }
+}
+
+$(document).ready(function() {
+    
 
 });
